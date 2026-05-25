@@ -1,6 +1,6 @@
 # 🏠 DublinLet AI
 
-> An intelligent rental assistant for Dublin, Ireland — built on the OpenAI Responses API.
+> An intelligent rental assistant for Dublin, Ireland - built on the OpenAI Responses API.
 
 DublinLet AI is a domain-specific conversational agent that helps users find, evaluate, and book rental properties in Dublin. It goes beyond what a generic LLM can offer by combining **live external APIs**, **retrieval-augmented generation (RAG)**, and **real-world actions** (calendar booking, email) in a single chat interface.
 
@@ -18,13 +18,13 @@ Dublin's rental market is one of the most difficult in Europe. Prospective tenan
 - Complex affordability trade-offs against Dublin's high cost of living
 - Confusing commute options across a city with mixed transport infrastructure
 
-A generic ChatGPT session cannot help with any of this concretely — it has no access to live listings, cannot calculate a real commute time, and cannot book a viewing. DublinLet AI was built to fill that gap.
+A generic ChatGPT session cannot help with any of this concretely - it has no access to live listings, cannot calculate a real commute time, and cannot book a viewing. DublinLet AI was built to fill that gap.
 
 ---
 
 ## 💡 The Idea
 
-The assistant acts as a knowledgeable Dublin rental agent in the user's pocket. A user describes what they are looking for in natural language — budget, location preferences, workplace, lifestyle needs — and the assistant handles the rest:
+The assistant acts as a knowledgeable Dublin rental agent in the user's pocket. A user describes what they are looking for in natural language - budget, location preferences, workplace, lifestyle needs - and the assistant handles the rest:
 
 1. Searches for real listings on Daft.ie
 2. Calculates live commute times to the user's workplace via Google Maps
@@ -71,10 +71,10 @@ client.responses.create(instructions, history, tools)
 ### RAG System
 
 A FAISS vector index is built at startup from 18 short passages covering:
-- **8 neighbourhood profiles** — Rathmines, Ballsbridge, Tallaght, Clontarf, Swords, Phibsborough, Dún Laoghaire, Inchicore
-- **5 scam patterns** — wire transfer deposits, landlord-abroad stories, phantom listings, pressure tactics, ownership verification
-- **3 financial/legal rules** — RPZ rent caps, rent-to-income guidelines, cost-of-living benchmarks
-- **2 transport passages** — Dublin Bus/Luas/DART coverage, BusConnects cycling infrastructure
+- **8 neighbourhood profiles** - Rathmines, Ballsbridge, Tallaght, Clontarf, Swords, Phibsborough, Dún Laoghaire, Inchicore
+- **5 scam patterns** - wire transfer deposits, landlord-abroad stories, phantom listings, pressure tactics, ownership verification
+- **3 financial/legal rules** - RPZ rent caps, rent-to-income guidelines, cost-of-living benchmarks
+- **2 transport passages** - Dublin Bus/Luas/DART coverage, BusConnects cycling infrastructure
 
 Embeddings are produced with `sentence-transformers/all-MiniLM-L6-v2` (384 dimensions). Retrieval uses `faiss.IndexFlatIP` (cosine similarity on normalised vectors), returning the top 3 passages above a 0.25 similarity threshold.
 
@@ -85,7 +85,7 @@ Embeddings are produced with `sentence-transformers/all-MiniLM-L6-v2` (384 dimen
 ```
 dublinlet-ai/
 │
-├── DublinLetAI.ipynb          # Main notebook — run this in Google Colab
+├── DublinLetAI.ipynb          # Main notebook - run this in Google Colab
 ├── README.md                  # This file
 └── report/
     └── DublinLetAI_Report.pdf # Project report (submitted separately)
@@ -106,11 +106,11 @@ dublinlet-ai/
   - Google Calendar API
 - A Gmail account with an App Password generated
 
-### Step 1 — Open in Google Colab
+### Step 1 - Open in Google Colab
 
 Upload `DublinLetAI.ipynb` to [Google Colab](https://colab.research.google.com) or open it directly from this repository.
 
-### Step 2 — Add API Keys to Colab Secrets
+### Step 2 - Add API Keys to Colab Secrets
 
 Click the 🔑 **Secrets** icon in the left sidebar and add the following:
 
@@ -121,28 +121,28 @@ Click the 🔑 **Secrets** icon in the left sidebar and add the following:
 | `GOOGLE_PLACES_KEY` | Google Cloud Console → Credentials |
 | `GMAIL_APP_PASSWORD` | myaccount.google.com → Security → App Passwords |
 
-### Step 3 — Upload Google Calendar Credentials
+### Step 3 - Upload Google Calendar Credentials
 
 - In Google Cloud Console, create an OAuth 2.0 Desktop client ID
 - Download the JSON file, rename it to `credentials.json`
 - Upload it to Colab via the Files panel (folder icon in left sidebar)
 
-### Step 4 — Run All Cells in Order
+### Step 4 - Run All Cells in Order
 
-- **Cell 1** — installs dependencies
-- **Cell 2** — loads API keys from Secrets
-- **Cell 3** — builds the FAISS RAG index
-- **Cell 4** — defines the Calendar OAuth flow
-- **Cell 5** — runs authentication (one-time, saves `token.pickle`)
-- **Cell 6** — sets up Gmail helper
-- **Cell 7** — defines all 8 tools
-- **Cell 8** — implements all tool functions
-- **Cell 9** — budget visualisation demo
-- **Cell 10** — system prompt
-- **Cell 11** — agent loop
-- **Cell 12** — launches the chat interface
+- **Cell 1** - installs dependencies
+- **Cell 2** - loads API keys from Secrets
+- **Cell 3** - builds the FAISS RAG index
+- **Cell 4** - defines the Calendar OAuth flow
+- **Cell 5** - runs authentication (one-time, saves `token.pickle`)
+- **Cell 6** - sets up Gmail helper
+- **Cell 7** - defines all 8 tools
+- **Cell 8** - implements all tool functions
+- **Cell 9** - budget visualisation demo
+- **Cell 10** - system prompt
+- **Cell 11** - agent loop
+- **Cell 12** - launches the chat interface
 
-> **Note on Google Calendar:** Cell 5 prints an OAuth URL. Open it in your browser, grant access, and paste the authorisation code back into the Colab prompt. This only needs to be done once — the token is saved to `token.pickle`.
+> **Note on Google Calendar:** Cell 5 prints an OAuth URL. Open it in your browser, grant access, and paste the authorisation code back into the Colab prompt. This only needs to be done once - the token is saved to `token.pickle`.
 
 > **Note on Daft.ie:** The assistant queries Daft.ie's unofficial GraphQL endpoint. If this fails due to rate limiting, it automatically falls back to curated synthetic listings calibrated to current market data.
 
@@ -179,10 +179,10 @@ My name is Alex."
 
 ## ⚙️ Technical Notes
 
-- The notebook uses the **OpenAI Responses API** (`client.responses.create`), not the Chat Completions API. These are different — the Responses API is designed for agentic, tool-calling workflows.
+- The notebook uses the **OpenAI Responses API** (`client.responses.create`), not the Chat Completions API. These are different - the Responses API is designed for agentic, tool-calling workflows.
 - Conversation history is managed manually as a list passed on every call. The API is stateless.
 - The Google Places tool uses the **v1 Places API** (`places.googleapis.com/v1/places:searchNearby`), not the legacy Places API. Make sure you enable "Places API (New)" in Google Cloud Console.
-- Google Calendar runs in **Mock Mode** if `token.pickle` is not present — it prints exactly what it would send to the API without making a real call.
+- Google Calendar runs in **Mock Mode** if `token.pickle` is not present - it prints exactly what it would send to the API without making a real call.
 
 ---
 
@@ -203,6 +203,6 @@ My name is Alex."
 
 - [RTB Rent Index Q3 2024](https://www.rtb.ie/research/rent-index)
 - [Daft.ie Rental Report 2024](https://www.daft.ie/report)
-- [Threshold Ireland — Annual Report 2024](https://www.threshold.ie)
+- [Threshold Ireland - Annual Report 2024](https://www.threshold.ie)
 - [NTA BusConnects Documentation](https://www.busconnects.ie)
 - [CSO Consumer Price Index](https://www.cso.ie)
